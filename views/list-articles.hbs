@@ -1,0 +1,88 @@
+<div class="container mb-3">
+  <h1 class="text-center m-5">Liste des Articles</h1>
+
+  {{#if error}}
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+  {{/if}}
+  {{#if success}}
+    <div class="alert alert-success" role="alert">
+      {{success}}
+    </div>
+  {{/if}}
+
+  <div class="row text-center">
+    {{#each articles}}
+      <div class="col-md-6 p-1">
+        <div class="card text-center">
+          <div class="card-header">
+            <p class="badge bg-secondary">{{categorie}}</p>
+          </div>
+          <div class="card-body">
+            <a href="/article/{{_id}}" class="text-decoration-none"><h4
+              >{{titre}}</h4></a>
+            <p class="card-text">ecris par :
+              <span class="badge text-bg-info">{{pseudo}}</span>
+            </p>
+            <a href="/article/{{_id}}" class="btn btn-primary">En savoir plus !</a>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-center mb-2">
+            <a href="/update-article/{{_id}}"><button
+                class="btn btn-warning me-md-2"
+                type="button"
+              >Modifier</button></a>
+            <button
+              class="btn btn-danger"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#Modal{{_id}}"
+            >Supprimer</button>
+          </div>
+          <div class="card-footer text-body-secondary">
+            {{createdAt}}
+          </div>
+        </div>
+      </div>
+      {{! !-- Modal --> }}
+      <div
+        class="modal fade"
+        id="Modal{{_id}}"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">{{titre}}</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >Annuler</button>
+              <form
+                action="/delete-article/{{_id}}"
+                method="post"
+                enctype="application/x-www-form-urlencoded"
+              >
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

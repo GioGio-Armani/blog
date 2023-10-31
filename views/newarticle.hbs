@@ -1,0 +1,88 @@
+<div class="container">
+  <h1 class="text-center m-3">Créer un article</h1>
+
+  {{#if error}}
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+  {{/if}}
+  {{#if success}}
+    <div class="alert alert-success" role="alert">
+      {{success}}
+    </div>
+  {{/if}}
+
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+
+      <form
+        action="/newarticle"
+        method="post"
+        enctype="application/x-www-form-urlencoded"
+      >
+        <div class="mb-3">
+          <label for="pseudo" class="form-label">Pseudo</label>
+          <input type="text" name="pseudo" id="pseudo" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="titre" class="form-label">Titre</label>
+          <input type="text" name="titre" id="titre" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <p>Choisir un categorie</p>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="categorie"
+              id="article"
+              value="article"
+            />
+            <label class="form-check-label" for="article">
+              Article
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="categorie"
+              id="comparaison"
+              value="comparaison"
+            />
+            <label class="form-check-label" for="comparaison">
+              Comparaison
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="categorie"
+              id="essai"
+              value="essai"
+            />
+            <label class="form-check-label" for="essai">
+              Essai
+            </label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="contenu" class="form-label">Contenu</label>
+          <textarea
+            name="contenu"
+            id="contenu"
+            cols="30"
+            rows="10"
+            class="form-control"
+            style="resize: none;"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </form>
+    </div>
+  </div>
+</div>
