@@ -20,6 +20,7 @@ router
   .post(articleController.postNewArticle);
 router.route("/article/:_id").get(articleController.getArticle);
 router.route("/delete-article/:_id").post(articleController.deletePost);
+router.route("/update-article/:_id").get(articleController.getUpdate);
 router.route("/update-article/:_id").post(articleController.updatePost);
 
 // list articles

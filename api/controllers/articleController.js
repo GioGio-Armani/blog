@@ -62,6 +62,16 @@ module.exports = {
     }
   },
 
+  getUpdate: async (req, res) => {
+    try {
+      const article = await articleModel.findById(req.params._id).lean();
+      res.render("newarticle", { article });
+    } catch (error) {
+      console.log(error);
+      res.redirect("/list-articles?error=Erreur serveur");
+    }
+  },
+
   updatePost: async (req, res) => {
     if (!req.body.contenu && !req.body.titre && !req.body.pseudo) {
       return res.status(400).redirect("/newarticle?error=Champs vides");

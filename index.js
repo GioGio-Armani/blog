@@ -14,6 +14,9 @@ connectDB();
 app.engine("hbs", engine({ extname: "hbs" }));
 app.set("view engine", "hbs");
 MomentHandler.registerHelpers(Handlebars);
+Handlebars.registerHelper("eq", function (arg1, arg2, options) {
+  return arg1 === arg2 ? options.fn(this) : options.inverse(this);
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

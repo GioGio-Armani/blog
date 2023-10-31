@@ -2,14 +2,14 @@
   <h1 class="text-center m-3">Créer un article</h1>
 
   {{#if error}}
-    <div class="alert alert-danger" role="alert">
-      {{error}}
-    </div>
+  <div class="alert alert-danger" role="alert">
+    {{error}}
+  </div>
   {{/if}}
   {{#if success}}
-    <div class="alert alert-success" role="alert">
-      {{success}}
-    </div>
+  <div class="alert alert-success" role="alert">
+    {{success}}
+  </div>
   {{/if}}
 
 </div>
@@ -18,53 +18,37 @@
   <div class="row justify-content-center">
     <div class="col-6">
 
-      <form
-        action="/newarticle"
-        method="post"
-        enctype="application/x-www-form-urlencoded"
-      >
+      <form {{#if article}} action="/update-article/{{article._id}}" {{else}} action="/newarticle" {{/if}} method="post"
+        enctype="application/x-www-form-urlencoded">
         <div class="mb-3">
           <label for="pseudo" class="form-label">Pseudo</label>
-          <input type="text" name="pseudo" id="pseudo" class="form-control" />
+          <input type="text" name="pseudo" id="pseudo" class="form-control" {{#if article}} value="{{article.pseudo}}"
+            {{/if}} />
         </div>
         <div class="mb-3">
           <label for="titre" class="form-label">Titre</label>
-          <input type="text" name="titre" id="titre" class="form-control" />
+          <input type="text" name="titre" id="titre" class="form-control" {{#if article}} value="{{article.titre}}"
+            {{/if}} />
         </div>
         <div class="mb-3">
           <p>Choisir un categorie</p>
           <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="categorie"
-              id="article"
-              value="article"
-            />
+            <input class="form-check-input" type="radio" name="categorie" id="article" value="article" {{#if article}}
+              {{#eq article.categorie "article" }} checked {{/eq}} {{/if}}/>
             <label class="form-check-label" for="article">
               Article
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="categorie"
-              id="comparaison"
-              value="comparaison"
-            />
+            <input class="form-check-input" type="radio" name="categorie" id="comparaison" value="comparaison" {{#if article}}
+              {{#eq article.categorie "comparaison" }} checked {{/eq}} {{/if}} />
             <label class="form-check-label" for="comparaison">
               Comparaison
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="categorie"
-              id="essai"
-              value="essai"
-            />
+            <input class="form-check-input" type="radio" name="categorie" id="essai" value="essai" {{#if article}}
+              {{#eq article.categorie "essai" }} checked {{/eq}} {{/if}} />
             <label class="form-check-label" for="essai">
               Essai
             </label>
@@ -72,14 +56,8 @@
         </div>
         <div class="mb-3">
           <label for="contenu" class="form-label">Contenu</label>
-          <textarea
-            name="contenu"
-            id="contenu"
-            cols="30"
-            rows="10"
-            class="form-control"
-            style="resize: none;"
-          ></textarea>
+          <textarea name="contenu" id="contenu" cols="30" rows="10" class="form-control"
+            style="resize: none;">{{#if article}}{{article.contenu}}{{/if}}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Envoyer</button>
       </form>
